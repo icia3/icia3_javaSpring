@@ -1,0 +1,33 @@
+<div class="wep--header__wrap">
+    <header class="wep--header flex align-center justify-between">
+        <div class="wep--header__front flex">
+            <div class="wep--header__logo align-center">
+                <h1 class="wep--logo">오이마켓</h1>
+            </div>
+            <form th:action="@{serchProd}" method="post" enctype="multipart/form-data">
+            <nav class="wep--header__menu flex li align-center">
+                <li class="active">
+                    <a th:href="@{/}">중고거래</a>
+                </li>
+                <li>
+                <input type="text" class="wep--header__search input" placeholder="물품이나 동네를 검색해보세요.">
+                </li>
+                <li>
+                <input type="submit" class="wep--header__chat input over" value="검색">
+                </li>
+            </nav>
+            </form>
+        </div>
+        <div class="wep--header__back flex li align-center">
+            <li>
+                <a th:href="@{login}">로그인</a>
+            </li>
+            <li>
+                <a th:href="@{join}">회원가입</a>
+            </li>
+            <li hidden>
+                <a th:href="@{white}">글쓰기</a>
+            </li>
+        </div>
+    </header>
+</div>

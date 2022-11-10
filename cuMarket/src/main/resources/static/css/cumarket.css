@@ -1,0 +1,271 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+a:visited {
+    text-decoration: none; color: black;
+}
+
+
+.flex{
+    display: flex;
+}
+
+.align-center{
+    align-items: center;
+}
+
+.li{
+    list-style: none;
+}
+
+.justify-between{
+    justify-content: space-between;
+}
+
+.justify-content{
+    justify-content: center;
+}
+
+.input{
+    border-radius: 5px;
+}
+
+.wep_body{
+    height: 760px;
+    width: 100%;
+}
+.wep--section__wrap{
+    width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+
+.wep--header__wrap{
+    position: fixed;
+    height: 60px;
+    width: 100%;
+    background-color: white;
+    top: 0;
+    z-index: 1;
+}
+.wep--header{
+    max-width: 1200px;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+}
+.wep--header__logo{
+    margin: 0 auto;
+}
+
+.wep--logo{
+    font-size: 25px;
+    color: green;
+    margin-right: 30px;
+}
+
+.wep--header__menu>li{
+    font-size: 18px;
+    margin-right: 20px;
+}
+.wep--header__menu>li>a{
+    font-weight: 600;
+}
+
+.wep--header__back>li{
+    font-size: 18px;
+    margin-right: 20px;
+}
+.wep--header__back>li>a{
+    font-weight: 600;
+}
+
+.wep--header__menu>li>a:hover{
+    color: green;
+}
+.wep--header__search{
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    background: #eeeef3;
+    border: 0px;
+}
+
+.active{
+    color: green;
+}
+
+.wep--header__chat{
+    width: 86px;
+    height: 40px;
+    background: white;
+    border-width: 1px; 
+    font-size: 15px;
+    font-weight: 600;
+    border-color: rgb(rgba(2, 0, 0, 0.048))
+}
+.over:hover{
+    background-color: #f1f3f5;
+    cursor: pointer;
+}
+/* HEADER sector */
+.wep--section__first{
+    background-color: rgb(250, 247, 242);
+    margin-top: 60px;
+}
+
+.wep--section__f1{
+    margin: auto;
+}
+
+.wep--section__content1{
+    font-size: 44px;
+    font-weight: 600;
+    color: #222;
+}
+
+.wep--section__content2{
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 30px;
+}
+
+.wep--section__f2{
+    width: 500px;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.wep--section__p1{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 0;
+}
+
+.wep--section__b1{
+    margin-top: 20px;
+    margin-right: 15px;
+    background-color: rgba(73, 80, 87, 0.05);
+    color: #212529;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    padding: 15px 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+.wep--section__third{
+    background-color: #E6F3E6;
+    margin-top: 60px;    
+}
+
+.app-products--footer {
+    margin-top: 50px;
+  }
+
+  .app-link {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .app-footer {
+    padding: 50px 0 100px;
+  }
+  
+  .app-footer--top {
+    text-align: center;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .app-footer-categories {
+    margin: 30px auto 0;
+    width: 800px;
+    display: flex;
+    justify-content: space-between;
+    color: #333;
+  }
+  
+  .app-footer-categories li:hover {
+    text-decoration: underline;
+  }
+  
+  .app-footer-content__wrapper {
+    padding-top: 30px;
+    width: 750px;
+    margin: 0 auto;
+  }
+  
+  .app-footer-content {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .app-footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 60%;
+  }
+  
+  .app-footer-nav li {
+    width: 33%;
+    padding: 20px 0;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .app-footer-app__title {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .app-footer-content .button-group {
+    margin-top: 10px;
+  }
+
+  .button {
+    height: 55px;
+    padding: 0 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 0;
+    border-radius: 5px;
+    background-color: #f1f3f5;
+    color: #212529;
+  }
+
+  .button-group {
+    margin-top: 30px;
+    display: flex;
+    column-gap: 10px;
+  }
+
+  
+.button.vertical-small {
+    height: 40px;
+  }
+  
+  .button.font-small {
+    font-size: 14px;
+  }
+
+
+
+
+
+
+
+
