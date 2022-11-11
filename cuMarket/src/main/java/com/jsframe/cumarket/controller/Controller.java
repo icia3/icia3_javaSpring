@@ -35,16 +35,6 @@ public class Controller {
     }
 
 
-
-
-
-
-    @GetMapping("join")
-    public String join(){
-        log.info("join()");
-        return "join";
-    }
-
     @GetMapping("detail")
     public ModelAndView detail(long bnum){
         log.info("detail()");
