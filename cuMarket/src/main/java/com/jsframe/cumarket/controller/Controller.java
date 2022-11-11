@@ -1,10 +1,12 @@
 package com.jsframe.cumarket.controller;
 
 import com.jsframe.cumarket.entity.Board;
+import com.jsframe.cumarket.entity.Member;
 import com.jsframe.cumarket.repository.BoardRepository;
 import com.jsframe.cumarket.serivce.Service;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -76,6 +78,14 @@ public class Controller {
                              RedirectAttributes rttr){
         log.info("updateProc()");
         String view = Serv.boardUpdate(files, board, session, rttr);
+
+        return view;
+    }
+
+    @PostMapping("writeProc")
+    public String writeProc(Member member, RedirectAttributes rttr){
+        log.info("writeProc()");
+        String view = Serv.insertMember(member,rttr);
 
         return view;
     }
