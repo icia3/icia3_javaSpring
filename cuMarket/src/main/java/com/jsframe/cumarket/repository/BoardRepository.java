@@ -7,4 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface BoardRepository extends CrudRepository<Board, Long> {
     Page<Board> findByBnumGreaterThan(long bnum, Pageable pageable);
+
+
 }

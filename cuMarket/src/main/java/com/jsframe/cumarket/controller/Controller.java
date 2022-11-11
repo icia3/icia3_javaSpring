@@ -37,6 +37,7 @@ public class Controller {
     @GetMapping("login")
     public String login(){
         log.info("login");
+
         return "login";
     }
 
