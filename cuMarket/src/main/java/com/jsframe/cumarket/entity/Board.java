@@ -17,31 +17,31 @@ public class Board {
 
     //게시글 제목
     @Column(nullable = false, length = 50)
-    private String b_title;
+    private String btitle;
 
     //작성자(외래키)
     @ManyToOne
-    @JoinColumn(name = "b_writer")
-    private Member b_writer;
+    @JoinColumn(name = "bwriter")
+    private Member bwriter;
 
     //작성일자
     @CreationTimestamp
     @Column
-    private Timestamp b_date;
+    private Timestamp bdate;
 
     //상품이름
     @Column(nullable = false, length = 30)
-    private String b_pname;
+    private String bpname;
 
     //상품가격
     @Column(nullable = false)
-    private long b_price;
+    private long bprice;
 
     //판매지역
     @Column(nullable = false, length = 20)
-    private String b_loc;
+    private String bloc;
 
     //글 내용
     @Column(nullable = false)
-    private String b_content;
+    private String bcontent;
 }
