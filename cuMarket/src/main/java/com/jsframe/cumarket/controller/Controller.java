@@ -44,4 +44,11 @@ public class Controller {
         return mv;
     }
 
+
+    @GetMapping("list")
+    public String list(){
+        log.info("list()");
+        return "list";
+    }
+
 }
