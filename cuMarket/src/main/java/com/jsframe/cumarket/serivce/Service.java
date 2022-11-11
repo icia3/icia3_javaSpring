@@ -2,7 +2,11 @@ package com.jsframe.cumarket.serivce;
 
 import com.jsframe.cumarket.entity.Board;
 import com.jsframe.cumarket.repository.BoardRepository;
+
 import com.jsframe.cumarket.util.PagingUtil;
+
+import com.jsframe.cumarket.repository.MemberRepository;
+
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,6 +29,9 @@ public class Service {
     @Autowired
     private BoardRepository bRepo;
 
+    @Autowired
+    private MemberRepository mRepo;
+
     public ModelAndView getBoard(long bnum){
         log.info("getBoard()");
         mv= new ModelAndView();
@@ -34,6 +41,7 @@ public class Service {
         mv.addObject("board", board);
         return mv;
     }
+
 
     //리스트에 페이징 처리
     public ModelAndView getBoardList(Integer pageNum, HttpSession session){
@@ -106,5 +114,17 @@ public class Service {
     //게시글 업로드(메소드만 만들어 놨음)
     private void fileUpload(List<MultipartFile> files, HttpSession session, Board board) {
     }
+
+    /*
+    public String loginProc(String m_id){
+        log.info("loginProc()");
+        String msg = null;
+        String view = null;
+
+
+
+    }*/
+
+
 
 }

@@ -11,27 +11,27 @@ public class Member {
 
     //회원 아이디
     @Id
-    private String m_id;
+    private String mid;
 
     //비밀번호
     @Column(nullable = false, length = 60)
-    private String m_pwd;
+    private String mpwd;
 
     //회원이름
     @Column(nullable = false, length = 10)
-    private String m_name;
+    private String mname;
 
     //생일
     @Column(nullable = false, length = 10)
-    private String m_birth;
+    private String mbirth;
 
     //이메일
     @Column(nullable = false, length = 40)
-    private String m_mail;
+    private String mmail;
 
     //전화번호
     @Column(nullable = false, length = 20)
-    private String m_phone;
+    private String mphone;
 
 
 }
