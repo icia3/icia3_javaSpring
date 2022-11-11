@@ -14,8 +14,8 @@ public class Manager {
 
     //관리자 아이디
     @Id
-    private String man_id;
+    private String manid;
 
     @Column(nullable = false, length = 30)
-    private String man_pwd;
+    private String manpwd;
 }

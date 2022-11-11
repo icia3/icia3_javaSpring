@@ -16,7 +16,7 @@ public class Comment {
 
     //작성자 아이디
     @ManyToOne
-    @JoinColumn(name = "cid")
+    @JoinColumn(name = "rid")
     private Member rid;
 
     //댓글 내용
