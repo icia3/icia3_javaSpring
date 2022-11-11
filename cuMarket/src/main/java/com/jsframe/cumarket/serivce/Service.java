@@ -42,7 +42,6 @@ public class Service {
         return mv;
     }
 
-
     //리스트에 페이징 처리
     public ModelAndView getBoardList(Integer pageNum, HttpSession session){
         log.info("getBoardList()");
@@ -124,7 +123,5 @@ public class Service {
 
 
     }*/
-
-
 
 }
