@@ -22,11 +22,22 @@ public class Controller {
         return "home";
     }
 
+    @GetMapping("join")
+    public String join(){
+        log.info("join()");
+        return "join";
+    }
+
     @GetMapping("login")
     public String login(){
         log.info("login");
         return "login";
     }
+
+
+
+
+
 
     @GetMapping("join")
     public String join(){
@@ -42,4 +53,5 @@ public class Controller {
         mv.setViewName("detail");
         return mv;
     }
+
 }
