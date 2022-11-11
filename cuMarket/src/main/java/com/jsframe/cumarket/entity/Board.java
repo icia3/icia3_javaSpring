@@ -13,7 +13,7 @@ public class Board {
     //게시글 번호
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long b_num;
+    private long bnum;
 
     //게시글 제목
     @Column(nullable = false, length = 50)
