@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Detail</title>
+    <link rel="stylesheet" href="css/cumarket.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<th:block th:include="header.html"></th:block>
+<hr>
+<section>
+    <div>
+     <h1 th:text="${board.b_title}"></h1>
+
+
+    </div>
+</section>
+<hr>
+<th:block th:include="footer.html"></th:block>
+
+</body>
+</html>
