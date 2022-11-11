@@ -25,4 +25,10 @@ public class Controller {
         log.info("join()");
         return "join";
     }
+
+    @GetMapping("list")
+    public String list(){
+        log.info("list()");
+        return "list";
+    }
 }

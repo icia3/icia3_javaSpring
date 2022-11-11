@@ -1,0 +1,53 @@
+.login-form, .login-header {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.data-area {
+    margin-bottom: 10px;
+}
+
+.title-row .t-date, .title-row .t-view, .data-row .t-date, .data-row .t-view
+{
+    display: none;
+}
+
+.p-10 {
+    width: 20%;
+}
+.p-15 {
+    width: 25%;
+}
+.p-30, p-45 {
+    width: 55%;
+}
+.p-85 {
+    width: 75%;
+}
+.dp-30, .dp-20, .dp-15, .dp-10, .dp-40 {
+    width: 75%;
+}
+.user-info:before, .user-info:after, .board-title:before, .board-title:after,
+.title-row:before, .title-row:after, .data-row:before, .data-row:after
+{
+    display: table;
+    content: " ";
+}
+
+.user-info:after, .board-title:after, .title-row:after, .data-row:after
+{
+    clear: both;
+}
+
+.title-row>div {
+    display: block;
+    float: left;
+    height: 30px;
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
