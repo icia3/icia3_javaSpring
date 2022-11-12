@@ -1,5 +1,7 @@
 package com.jsframe.cumarket.controller;
 
+
+
 import com.jsframe.cumarket.entity.Board;
 import com.jsframe.cumarket.entity.Member;
 import com.jsframe.cumarket.repository.BoardRepository;
@@ -13,8 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
+
 
 @org.springframework.stereotype.Controller
 @Log
@@ -41,6 +45,13 @@ public class Controller {
         log.info("login");
 
         return "login";
+    }
+
+    @PostMapping("loginProc")
+    public String loginProc(Member member, RedirectAttributes rttr){
+        log.info("loginProc()");
+        String view = Serv.loginProc(member, rttr);
+        return view;
     }
 
 

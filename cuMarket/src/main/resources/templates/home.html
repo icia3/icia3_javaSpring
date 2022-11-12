@@ -7,6 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/cumarket.css">
   <title>오이마켓</title>
+  <script th:inline="javascript">
+    $(function(){
+      let msg = [[${msg}]];
+      if(msg != null){
+        alert(msg);
+      }
+    });
+  </script>
 </head>
 <body>
 <th:block th:include="header.html"></th:block>

@@ -9,6 +9,7 @@ import com.jsframe.cumarket.util.PagingUtil;
 import com.jsframe.cumarket.repository.MemberRepository;
 
 import lombok.extern.java.Log;
+import org.hibernate.metamodel.model.domain.internal.MapMember;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,8 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
+
 
 @org.springframework.stereotype.Service
 @Log
@@ -42,6 +45,9 @@ public class Service {
         mv.addObject("board", board);
         return mv;
     }
+
+
+
 
     //리스트에 페이징 처리
     public ModelAndView getBoardList(Integer pageNum, HttpSession session){
@@ -136,14 +142,48 @@ public class Service {
         return view;
     }
 
-    /*
-    public String loginProc(String m_id){
+
+    public String loginProc (Member member, RedirectAttributes rttr){
+
+
         log.info("loginProc()");
         String msg = null;
         String view = null;
 
 
 
-    }*/
+        Member mem1 = new Member();
+        Board bor1 = new Board();
+
+        mem1.setMid("aa");
+        bor1.setBwriter(mem1);
+        Member me2 = bor1.getBwriter();
+        log.info(me2.getMid());
+        
+
+        //입력한 pwd
+        String cPwd = member.getMpwd();
+
+        Member mData = mRepo.findByMid(member.getMid());
+        String getPwd = mData.getMpwd();
+        log.info(getPwd);
+        log.info(cPwd);
+        if(cPwd.equals(getPwd)){
+            msg = "로그인 성공";
+            view = "redirect:/";
+        }
+        else{
+            msg = "로그인 실패";
+            view = "redirect:login";
+        }
+
+        rttr.addFlashAttribute("msg", msg);
+        return view;
+
+
+
+
+
+    }
 
 }
