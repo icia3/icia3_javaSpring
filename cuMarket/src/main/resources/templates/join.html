@@ -12,6 +12,7 @@
     <form th:action="@{writeProc}" method="post" class="write-form"
           enctype="multipart/form-data">
         <h2 class="login-header">회원가입</h2>
+
         <input type="text" class="write-input" name="m_id"
                autofocus placeholder="아이디를 입력하세요." required>
         <input type="password" class="write-input" name="m_pwd"
@@ -24,6 +25,7 @@
                placeholder="이메일을 입력하세요." required>
         <input type="text" class="write-input" name="m_phone"
                placeholder="전화번호를 입력하세요." required>
+
         <div class="btn-area">
             <input type="submit" class="btn-write" value="가입">
         </div>
@@ -32,4 +34,12 @@
 
 <th:block th:include="footer.html"></th:block>
 </body>
+<script th:inline="javascript">
+    $(function(){
+        let msg = [[${msg}]];
+        if(msg != null){
+            alert(msg);
+        }
+    });
+</script>
 </html>

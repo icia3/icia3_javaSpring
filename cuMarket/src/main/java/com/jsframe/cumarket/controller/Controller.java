@@ -1,14 +1,24 @@
 package com.jsframe.cumarket.controller;
 
+
+
+import com.jsframe.cumarket.entity.Board;
 import com.jsframe.cumarket.entity.Member;
 import com.jsframe.cumarket.repository.BoardRepository;
 import com.jsframe.cumarket.serivce.Service;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
 
 @org.springframework.stereotype.Controller
 @Log
@@ -62,11 +72,36 @@ public class Controller {
         return mv;
     }
 
+    /*
+    //리스트 페이지 맵핑
+    @GetMapping ("list")
+    public ModelAndView getList(Integer pageNum, HttpSession session){
+        log.info("getList()");
+        mv = Serv.getBoardList(pageNum, session);
+        mv.setViewName("list");
+        return mv;
+    }
 
-    @GetMapping("list")
-    public String list(){
-        log.info("list()");
-        return "list";
+    //수정 페이지 맵핑
+    @GetMapping("updateFrm")
+    public ModelAndView updateFrm(long bnum){
+        log.info("updateFrm()");
+        mv = Serv.getBoard(bnum);
+        mv.setViewName("updateFrm");
+        return mv;
+    }
+    */
+
+    //수정 매소드 맵핑
+    @PostMapping("updateProc")
+    public String updateProc(List<MultipartFile> files,
+                             Board board,
+                             HttpSession session,
+                             RedirectAttributes rttr){
+        log.info("updateProc()");
+        String view = Serv.boardUpdate(files, board, session, rttr);
+
+        return view;
     }
 
 }
