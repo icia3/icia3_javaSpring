@@ -30,6 +30,14 @@ public class Controller {
         return "join";
     }
 
+    @PostMapping("writeProc")
+    public String writeProc(Member member, RedirectAttributes rttr){
+        log.info("writeProc()");
+        String view = Serv.insertMember(member,rttr);
+
+        return view;
+    }
+
     @GetMapping("login")
     public String login(){
         log.info("login");

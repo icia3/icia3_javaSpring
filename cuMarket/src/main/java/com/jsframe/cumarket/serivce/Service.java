@@ -7,6 +7,7 @@ import com.jsframe.cumarket.repository.MemberRepository;
 import lombok.extern.java.Log;
 import org.hibernate.metamodel.model.domain.internal.MapMember;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -31,6 +32,28 @@ public class Service {
         return mv;
     }
 
+    @Transactional
+    public String insertMember(Member member, RedirectAttributes rttr) {
+        log.info("insertMember()");
+        String msg = null;
+        String view = null;
+
+        try {
+            mRepo.save(member);//
+
+            view = "redirect:/";//목록 화면으로 돌아가기.
+            msg = "회원가입 성공";
+        }catch (Exception e){
+            e.printStackTrace();
+            view = "redirect:join";
+            msg = "회원가입 실패";
+        }
+        rttr.addFlashAttribute("msg",msg);
+
+        return view;
+    }
+
+
 
     public String loginProc (Member member, RedirectAttributes rttr){
         log.info("loginProc()");
@@ -46,7 +69,7 @@ public class Service {
         bor1.setBwriter(mem1);
         Member me2 = bor1.getBwriter();
         log.info(me2.getMid());
-        
+
 
         //입력한 pwd
         String cPwd = member.getMpwd();
