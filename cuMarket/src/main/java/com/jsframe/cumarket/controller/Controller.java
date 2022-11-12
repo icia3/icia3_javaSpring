@@ -1,5 +1,6 @@
 package com.jsframe.cumarket.controller;
 
+import com.jsframe.cumarket.entity.Member;
 import com.jsframe.cumarket.repository.BoardRepository;
 import com.jsframe.cumarket.serivce.Service;
 import lombok.extern.java.Log;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @org.springframework.stereotype.Controller
 @Log
@@ -33,6 +35,13 @@ public class Controller {
         log.info("login");
 
         return "login";
+    }
+
+    @PostMapping("loginProc")
+    public String loginProc(Member member, RedirectAttributes rttr){
+        log.info("loginProc()");
+        String view = Serv.loginProc(member, rttr);
+        return view;
     }
 
 

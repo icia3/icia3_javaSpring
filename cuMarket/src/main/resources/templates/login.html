@@ -4,17 +4,26 @@
     <meta charset="UTF-8">
     <title>로그인</title>
     <link rel="stylesheet" href="css/join.css">
+    <script th:inline="javascript">
+        $(function(){
+            let msg = [[${msg}]];
+            if(msg != null){
+                alert(msg);
+            }
+        });
+    </script>
 </head>
+
 <body>
 <th:block th:include="header.html"></th:block>
 
 <div class="wep_body">
     <form th:action="@{loginProc}" method="post" class="write-form"
           enctype="multipart/form-data">
-        <h2 class="login-header">로그인</h2>
-        <input type="text" class="write-input" name=""
+        <h2 class="login-header" style="margin-top: 200px;">로그인</h2>
+        <input type="text" class="write-input" name="mid"
                autofocus placeholder="아이디" required>
-        <input type="password" class="write-input" name=""
+        <input type="password" class="write-input" name="mpwd"
                placeholder="비밀번호" required>
         <div class="btn-area">
             <input type="submit" class="btn-write" value="로그인">
