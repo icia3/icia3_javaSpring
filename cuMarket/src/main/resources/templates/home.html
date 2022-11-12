@@ -65,5 +65,13 @@
 
 
 </body>
+<script th:inline="javascript">
+  $(function(){
+    let msg = [[${msg}]];
+    if(msg != null){
+      alert(msg);
+    }
+  });
+</script>
 
 </html>

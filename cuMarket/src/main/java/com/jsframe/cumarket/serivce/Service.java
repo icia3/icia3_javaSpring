@@ -1,6 +1,7 @@
 package com.jsframe.cumarket.serivce;
 
 import com.jsframe.cumarket.entity.Board;
+import com.jsframe.cumarket.entity.Member;
 import com.jsframe.cumarket.repository.BoardRepository;
 
 import com.jsframe.cumarket.util.PagingUtil;
@@ -112,6 +113,27 @@ public class Service {
 
     //게시글 업로드(메소드만 만들어 놨음)
     private void fileUpload(List<MultipartFile> files, HttpSession session, Board board) {
+    }
+
+    @Transactional
+    public String insertMember(Member member, RedirectAttributes rttr) {
+        log.info("insertMember()");
+        String msg = null;
+        String view = null;
+
+        try {
+            mRepo.save(member);//
+
+            view = "redirect:/";//목록 화면으로 돌아가기.
+            msg = "회원가입 성공";
+        }catch (Exception e){
+            e.printStackTrace();
+            view = "redirect:join";
+            msg = "회원가입 실패";
+        }
+        rttr.addFlashAttribute("msg",msg);
+
+        return view;
     }
 
     /*
