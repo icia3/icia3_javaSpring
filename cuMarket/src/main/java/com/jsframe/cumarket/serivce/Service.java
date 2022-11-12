@@ -11,12 +11,15 @@ import com.jsframe.cumarket.repository.MemberRepository;
 import lombok.extern.java.Log;
 import org.hibernate.metamodel.model.domain.internal.MapMember;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -48,6 +51,8 @@ public class Service {
 
 
 
+
+    /*
 
     //리스트에 페이징 처리
     public ModelAndView getBoardList(Integer pageNum, HttpSession session){
@@ -90,6 +95,8 @@ public class Service {
 
         return pageHtml;
     }
+
+    */
 
     //게시글 수정
     @Transactional
@@ -159,7 +166,7 @@ public class Service {
         bor1.setBwriter(mem1);
         Member me2 = bor1.getBwriter();
         log.info(me2.getMid());
-        
+
 
         //입력한 pwd
         String cPwd = member.getMpwd();

@@ -40,6 +40,14 @@ public class Controller {
         return "join";
     }
 
+    @PostMapping("writeProc")
+    public String writeProc(Member member, RedirectAttributes rttr){
+        log.info("writeProc()");
+        String view = Serv.insertMember(member,rttr);
+
+        return view;
+    }
+
     @GetMapping("login")
     public String login(){
         log.info("login");
@@ -64,6 +72,7 @@ public class Controller {
         return mv;
     }
 
+    /*
     //리스트 페이지 맵핑
     @GetMapping ("list")
     public ModelAndView getList(Integer pageNum, HttpSession session){
@@ -81,6 +90,8 @@ public class Controller {
         mv.setViewName("updateFrm");
         return mv;
     }
+    */
+
     //수정 매소드 맵핑
     @PostMapping("updateProc")
     public String updateProc(List<MultipartFile> files,
@@ -93,11 +104,4 @@ public class Controller {
         return view;
     }
 
-    @PostMapping("writeProc")
-    public String writeProc(Member member, RedirectAttributes rttr){
-        log.info("writeProc()");
-        String view = Serv.insertMember(member,rttr);
-
-        return view;
-    }
 }
