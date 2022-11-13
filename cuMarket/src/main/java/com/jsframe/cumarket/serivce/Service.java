@@ -11,7 +11,7 @@ import com.jsframe.cumarket.repository.MemberRepository;
 import lombok.extern.java.Log;
 import org.hibernate.metamodel.model.domain.internal.MapMember;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -103,7 +103,7 @@ public class Service {
     */
 
     //게시글 수정
-    @Transactional
+    @javax.transaction.Transactional
     public String boardUpdate(List<MultipartFile> files,
                               Board board,
                               HttpSession session,
