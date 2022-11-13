@@ -10,24 +10,28 @@
                     <a th:href="@{list}">중고거래</a>
                 </li>
                 <li>
-                <input type="text" class="wep--header__search input" placeholder="물품이나 동네를 검색해보세요.">
+                    <input type="text" class="wep--header__search input" placeholder="물품이나 동네를 검색해보세요.">
                 </li>
                 <li>
-                <input type="submit" class="wep--header__chat input over" value="검색">
+                    <input type="submit" class="wep--header__chat input over" value="검색">
                 </li>
             </nav>
             </form>
         </div>
         <div class="wep--header__back flex li align-center">
-            <li>
+            <li id="loginBtn">
                 <a th:href="@{login}">로그인</a>
             </li>
-            <li>
+            <li id="wrtBtn" hidden>
+                <a th:href="@{register}">글쓰기</a>
+            </li>
+            <li id="joinBtn">
                 <a th:href="@{join}">회원가입</a>
             </li>
-            <li hidden>
-                <a th:href="@{white}">글쓰기</a>
+            <li id="logoutBtn" hidden>
+                <a th:href="@{logout}">로그아웃</a>
             </li>
+
         </div>
     </header>
 </div>

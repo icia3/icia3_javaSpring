@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 등록</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+        $(function() {
+            let msg = [[${msg}]];
+            console.log(msg);
+            if (msg != null) {
+                alert(msg);
+            }
+        });
+    </script>
+</head>
+<body>
+
+<div class="content">
+    <form th:action="@{regProc}" method="post" class="write-form"
+          enctype="multipart/form-data">
+        <h2 class="login-header">글쓰기</h2>
+        <input type="text" class="write-input" name="btitle"
+               autofocus placeholder="제목" required><br>
+        <input type="text" class="write-input" name="bwriter"
+               placeholder="작성자" th:value="${session.loginId}" required readonly><br>
+        <input type="text" class="write-input" name="bpname"
+               placeholder="상품명" required><br>
+        <input type="text" class="write-input" name="bprice"
+               placeholder="가격" required><br>
+        <input type="text" class="write-input" name="bloc"
+               placeholder="판매지역" required><br>
+        <textarea rows="15" name="bcontent"
+                  placeholder="글내용을 작성하세요."
+                  class="write-input ta"></textarea><br>
+        <!--
+        <div class="filebox">
+
+            <label for="file">업로드</label>
+            <input type="file" name="files" id="file" multiple>
+            <input type="text" class="upload-name" value="파일선택" readonly>
+        </div>
+        -->
+
+        <div class="btn-area">
+            <input type="submit" class="btn-write" value="등록">
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
