@@ -1,0 +1,105 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+div{
+    display: block;
+}
+p{
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.d-image {
+    width: 729px;
+}
+
+#article-images{
+    margin-top: 94px;
+    padding-bottom: 0;
+    position: relative;
+    width: 729px;
+    margin: 0 auto;
+}
+#article-profile{
+    width: 677px;
+    margin: 0 auto;
+}
+#article-profile-t{
+    text-decoration: none;
+    display: block;
+    margin-top: 25px;
+    padding-bottom: 23px;
+    position: relative;
+    border-bottom: 1px solid #e9ecef;
+}
+#article-profile-image>img {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+}
+#article-profile .space-between{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#article-profile-left{
+    display: inline-block;
+    margin-left: 8px;
+}
+#nickname{
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.6px;
+    color: #212529;
+}
+#local{
+    font-size: 13px;
+    line-height: 1.46;
+    letter-spacing: -0.6px;
+    color: #212529;
+}
+#article-description{
+    padding: 32px 0;
+    width: 677px;
+    margin: 0 auto;
+    border-bottom: 1px solid #e9ecef;
+}
+#btitle{
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.6px;
+}
+#bpname, #bdate{
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 1.46;
+    letter-spacing: -0.6px;
+    color: #868e96;
+    white-space: nowrap;
+}
+#bprice{
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 4px;
+    line-height: 1.76px;
+    letter-spacing: -0.6px;
+    width: 677px;
+    height: 31.67px;
+    align-items: center;
+}
+#article-content{
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+#bcontent{
+    font-size: 17px;
+    line-height: 6px;
+    letter-spacing: -0.6px;
+    margin: 26px 0;
+    word-break: break-all;
+}
