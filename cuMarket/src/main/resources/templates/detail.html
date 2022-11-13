@@ -1,26 +1,56 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Detail</title>
+    <title>detail</title>
     <link rel="stylesheet" href="css/cumarket.css">
+    <link rel="stylesheet" href="css/detail.css">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
             integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
             crossorigin="anonymous"></script>
 </head>
 <body>
 <th:block th:include="header.html"></th:block>
-<hr>
-<section>
+<!--이미지 (슬라이더 가능하면 슬라이더로)-->
+<section id="article-images">
     <div>
-     <h1 th:text="${board.b_title}"></h1>
-
-
+        <div class="image-wrap">
+            <img class="d-image" src="">
+        </div>
     </div>
 </section>
-<hr>
-<th:block th:include="footer.html"></th:block>
 
+<!--프로필-->
+<section id="article-profile">
+    <div id="article-profile-t">
+        <div class="space-between">
+            <div style="display: flex;">
+                <div id="article-profile-image">
+                    <img src="/images/profile.png">
+                </div>
+                <div id="article-profile-left">
+                    <div id="nickname" th:text="${board.bwriter}"></div>
+                    <div id="local" th:text="${board.bloc}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="article-description">
+    <h1 id="btitle" style="margin-top: 0px" th:text="${board.btitle}"></h1>
+    <p id="bpname" th:text="${board.bpname}"> &nbsp<time id="bdate" th:text="${#dates.format(baord.bdate, 'yyyy-MM-dd HH:mm:ss')}"></time></p>
+    <p id="bprice" th:text="${board.bprice}" }></p>
+    <div id="article-content">
+        <p id="bcontent" th:text="${board.bcontent}">
+
+        </p>
+    </div>
+</section>
+
+<!--댓글 기능-->
+<section>
+
+</section>
+<th:block th:include="footer.html"></th:block>
 </body>
 </html>

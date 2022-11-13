@@ -46,7 +46,11 @@ public class Service {
         //게시글 담기
         Board board = bRepo.findById(bnum).get();
         mv.addObject("board", board);
+
+        //첨부파일 담기
+
         return mv;
+
     }
 
 
@@ -185,11 +189,6 @@ public class Service {
 
         rttr.addFlashAttribute("msg", msg);
         return view;
-
-
-
-
-
     }
 
     public String regProc(Board board, HttpSession session, RedirectAttributes rttr) {
