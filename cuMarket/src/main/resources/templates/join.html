@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
@@ -34,12 +34,5 @@
 
 <th:block th:include="footer.html"></th:block>
 </body>
-<script th:inline="javascript">
-    $(function(){
-        let msg = [[${msg}]];
-        if(msg != null){
-            alert(msg);
-        }
-    });
-</script>
+
 </html>

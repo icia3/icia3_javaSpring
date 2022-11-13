@@ -34,6 +34,12 @@ public class Controller {
         return "home";
     }
 
+    @GetMapping("main")
+    public String main(){
+        log.info("main()");
+        return "main";
+    }
+
     @GetMapping("join")
     public String join(){
         log.info("join()");
@@ -56,9 +62,10 @@ public class Controller {
     }
 
     @PostMapping("loginProc")
-    public String loginProc(Member member, RedirectAttributes rttr){
+    public String loginProc(Member member, RedirectAttributes rttr, HttpSession session){
         log.info("loginProc()");
-        String view = Serv.loginProc(member, rttr);
+        String view = Serv.loginProc(member, rttr, session);
+
         return view;
     }
 
@@ -101,6 +108,20 @@ public class Controller {
         log.info("updateProc()");
         String view = Serv.boardUpdate(files, board, session, rttr);
 
+        return view;
+    }
+
+    @GetMapping("register")
+    public String register(){
+        log.info("register()");
+        return "register";
+
+    }
+
+    @PostMapping("regProc")
+    public String regProc(Board board, HttpSession session, RedirectAttributes rttr){
+        log.info("regProc()");
+        String view = Serv.regProc(board,session,rttr);
         return view;
     }
 

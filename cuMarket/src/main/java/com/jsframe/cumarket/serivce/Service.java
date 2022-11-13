@@ -150,39 +150,38 @@ public class Service {
     }
 
 
-    public String loginProc (Member member, RedirectAttributes rttr){
+    public String loginProc (Member member, RedirectAttributes rttr, HttpSession session){
 
 
         log.info("loginProc()");
         String msg = null;
         String view = null;
 
+        try{
+            //입력한 pwd
+            String cPwd = member.getMpwd();
 
+            Member mData = mRepo.findByMid(member.getMid());
+            String getPwd = mData.getMpwd();
+            log.info(getPwd);
+            log.info(cPwd);
+            if(cPwd.equals(getPwd)){
+                session.setAttribute("loginName",mData.getMname());
+                session.setAttribute("loginId", mData.getMid());
 
-        Member mem1 = new Member();
-        Board bor1 = new Board();
+                msg = "로그인 성공";
+                view = "redirect:main";
+            }
+            else{
+                msg = "로그인 실패";
+                view = "redirect:login";
+            }
+        } catch (Exception e){
 
-        mem1.setMid("aa");
-        bor1.setBwriter(mem1);
-        Member me2 = bor1.getBwriter();
-        log.info(me2.getMid());
-
-
-        //입력한 pwd
-        String cPwd = member.getMpwd();
-
-        Member mData = mRepo.findByMid(member.getMid());
-        String getPwd = mData.getMpwd();
-        log.info(getPwd);
-        log.info(cPwd);
-        if(cPwd.equals(getPwd)){
-            msg = "로그인 성공";
-            view = "redirect:/";
-        }
-        else{
             msg = "로그인 실패";
             view = "redirect:login";
         }
+
 
         rttr.addFlashAttribute("msg", msg);
         return view;
@@ -193,4 +192,28 @@ public class Service {
 
     }
 
+    public String regProc(Board board, HttpSession session, RedirectAttributes rttr) {
+        log.info("regProc()");
+        String msg = null;
+        String view = null;
+        Member member = null;
+
+        try{
+
+             member = board.getBwriter();
+             log.info("이름" + member.getMname());
+
+            bRepo.save(board);
+            msg = "게시물 등록 성공";
+            view = "redirect:main";
+        } catch (Exception e){
+            msg = "게시물 등록 실패";
+            view = "redirect:register";
+        }
+
+        rttr.addFlashAttribute("msg",msg);
+        return view;
+
+
+    }
 }
