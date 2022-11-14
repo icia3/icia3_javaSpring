@@ -172,22 +172,29 @@ public class Service {
         String view = null;
 
         try {
-            //입력한 pwd
-            String cPwd = member.getMpwd();
-
             Member mData = mRepo.findByMid(member.getMid());
-            String getPwd = mData.getMpwd();
-            log.info(getPwd);
-            log.info(cPwd);
-            if (cPwd.equals(getPwd)) {
-                session.setAttribute("loginName", mData.getMname());
-                session.setAttribute("loginId", mData.getMid());
-                msg = "로그인 성공";
-                view = "redirect:/";
-            } else {
-                msg = "로그인 실패";
+
+            if(mData == null){
+                msg = "해당 로그인이 존재하지 않습니다.";
                 view = "redirect:login";
+            } else {
+                //입력한 pwd
+                String cPwd = member.getMpwd();
+                String getPwd = mData.getMpwd();
+                log.info(getPwd);
+                log.info(cPwd);
+
+                if (cPwd.equals(getPwd)) {
+                    session.setAttribute("loginName", mData.getMname());
+                    session.setAttribute("loginId", mData.getMid());
+                    msg = "로그인 성공";
+                    view = "redirect:/";
+                } else {
+                    msg = "로그인 실패";
+                    view = "redirect:login";
+                }
             }
+
         } catch (Exception e) {
 
             msg = "로그인 실패";
