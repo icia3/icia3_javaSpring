@@ -104,7 +104,7 @@ public class Service {
     private String getPaging(Integer pageNum, int totalPage) {
         String pageHtml = null;
         int pageCnt = 2;//보여질 페이지 번호 개수
-        String listName = "?";//게시판 분류 이름(현재 없음)
+        String listName = "list?";//게시판 분류 이름(현재 없음)
 
         PagingUtil paging = new PagingUtil(totalPage, pageNum,
                 pageCnt, listName);
@@ -171,22 +171,29 @@ public class Service {
         String view = null;
 
         try {
-            //입력한 pwd
-            String cPwd = member.getMpwd();
-
             Member mData = mRepo.findByMid(member.getMid());
-            String getPwd = mData.getMpwd();
-            log.info(getPwd);
-            log.info(cPwd);
-            if (cPwd.equals(getPwd)) {
-                session.setAttribute("loginName", mData.getMname());
-                session.setAttribute("loginId", mData.getMid());
-                msg = "로그인 성공";
-                view = "redirect:/";
-            } else {
-                msg = "로그인 실패";
+
+            if(mData == null){
+                msg = "해당 로그인이 존재하지 않습니다.";
                 view = "redirect:login";
+            } else {
+                //입력한 pwd
+                String cPwd = member.getMpwd();
+                String getPwd = mData.getMpwd();
+                log.info(getPwd);
+                log.info(cPwd);
+
+                if (cPwd.equals(getPwd)) {
+                    session.setAttribute("loginName", mData.getMname());
+                    session.setAttribute("loginId", mData.getMid());
+                    msg = "로그인 성공";
+                    view = "redirect:/";
+                } else {
+                    msg = "로그인 실패";
+                    view = "redirect:login";
+                }
             }
+
         } catch (Exception e) {
 
             msg = "로그인 실패";
