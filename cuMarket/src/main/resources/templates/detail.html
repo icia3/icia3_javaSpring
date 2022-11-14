@@ -11,13 +11,21 @@
             integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
             crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script th:inline="javascript">
-        $(function () {
 
-            $("delBtn").click(function (){
+    <script th:inline="javascript">
+        $(function (){
+
+            $("#delBtn").click(function (){
                 location.href = "delete?bnum=" + [[${board.bnum}]];
             });
 
+            $("#upbtn").click(function (){
+                location.href = ""
+            });
+
+            $("#backbtn").click(function (){
+                location.href="list?pageNum=" + [[${session.pageNum}]];
+            });
 
             $( document ).ready( function() {
                 $( '.slider' ).slick( {
@@ -26,7 +34,7 @@
                     dots:true,
                     arrows:true,
                 } );
-            } );
+            });
 
         });
 
