@@ -1,7 +1,9 @@
 package com.jsframe.cumarket.serivce;
 
 import com.jsframe.cumarket.entity.Board;
+import com.jsframe.cumarket.entity.BoardFile;
 import com.jsframe.cumarket.entity.Member;
+import com.jsframe.cumarket.repository.BoardFileRepository;
 import com.jsframe.cumarket.repository.BoardRepository;
 
 import com.jsframe.cumarket.util.PagingUtil;
@@ -11,12 +13,18 @@ import com.jsframe.cumarket.repository.MemberRepository;
 import lombok.extern.java.Log;
 import org.hibernate.metamodel.model.domain.internal.MapMember;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
+
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +33,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 
@@ -35,6 +48,9 @@ public class Service {
 
     @Autowired
     private BoardRepository bRepo;
+
+    @Autowired
+    private BoardFileRepository bfRepo;
 
     @Autowired
     private MemberRepository mRepo;
@@ -52,7 +68,6 @@ public class Service {
         return mv;
 
     }
-
 
     //리스트에 페이징 처리
     public ModelAndView getBoardList(Integer pageNum, HttpSession session) {
@@ -97,7 +112,6 @@ public class Service {
         return pageHtml;
     }
 
-
     //게시글 수정
     @Transactional
     public String boardUpdate(List<MultipartFile> files,
@@ -124,9 +138,6 @@ public class Service {
         return view;
     }
 
-    //게시글 업로드(메소드만 만들어 놨음)
-    private void fileUpload(List<MultipartFile> files, HttpSession session, Board board) {
-    }
 
     @Transactional
     public String insertMember(Member member, RedirectAttributes rttr) {
@@ -186,7 +197,9 @@ public class Service {
         return view;
     }
 
-    public String regProc(Board board, HttpSession session, RedirectAttributes rttr) {
+    @Transactional
+    public String regProc(List<MultipartFile> files,
+                          Board board, HttpSession session, RedirectAttributes rttr) {
         log.info("regProc()");
         String msg = null;
         String view = null;
@@ -198,6 +211,7 @@ public class Service {
             log.info("이름" + member.getMname());
 
             bRepo.save(board);
+            fileUpload(files, session, board);
             msg = "게시물 등록 성공";
             view = "redirect:main";
         } catch (Exception e) {
@@ -207,8 +221,61 @@ public class Service {
 
         rttr.addFlashAttribute("msg", msg);
         return view;
+    }
 
+    //게시글 업로드(메소드만 만들어 놨음)
+    private void fileUpload(List<MultipartFile> files, HttpSession session, Board board) throws Exception{
+        log.info("fileUpload()");
+        //파일 저장 위치 지정. session을 활용
+        String realPath = session.getServletContext().getRealPath("/");
+        log.info("realPath : " + realPath);
 
+        //파일 업로드용 폴더를 자동으로 생성하도록 처리
+        //업로드용 폴더 : upload
+        realPath += "upload/";
+        File folder = new File(realPath);
+        if(folder.isDirectory() == false){//폴더가 없을 경우 실행.
+            folder.mkdir();//폴더 생성 메소드
+        }
+
+        for(MultipartFile mf : files){
+            String orname = mf.getOriginalFilename();//업로드 파일명 가져오기
+            if(orname.equals("")){
+                //업로드하는 파일이 없는 상태.
+                return;//파일 저장 처리 중지!
+            }
+
+            //파일 정보를 저장(to boardfiletbl)
+            BoardFile bf = new BoardFile();
+            bf.setBfbid(board);
+            bf.setBforiname(orname);
+            String sysname = System.currentTimeMillis()
+                    + orname.substring(orname.lastIndexOf("."));
+            bf.setBfsysname(sysname);
+
+            //업로드하는 파일을 upload 폴더에 저장.
+            File file = new File(realPath + sysname);
+
+            //파일 저장(upload 폴더)
+            mf.transferTo(file);
+
+            //파일 정보를 DB에 저장
+            bfRepo.save(bf);
+        }
+    }
+
+    public ResponseEntity<Resource> fileDownlaod(BoardFile bfile, HttpSession session) throws IOException {
+        log.info("fileDownload()");
+
+        //파일 저장경로 구하기
+        String realpath = session.getServletContext().getRealPath("/");
+        realpath += "upload/" + bfile.getBfsysname();
+        InputStreamResource fResource = new InputStreamResource(new FileInputStream(realpath));
+        String fileName = URLEncoder.encode(bfile.getBforiname(), "UTF-8");
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .cacheControl(CacheControl.noCache())
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +fileName)
+                .body(fResource);
     }
 }
 

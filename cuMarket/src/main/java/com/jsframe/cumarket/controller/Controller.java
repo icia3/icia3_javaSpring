@@ -3,21 +3,27 @@ package com.jsframe.cumarket.controller;
 
 
 import com.jsframe.cumarket.entity.Board;
+import com.jsframe.cumarket.entity.BoardFile;
 import com.jsframe.cumarket.entity.Member;
 import com.jsframe.cumarket.repository.BoardRepository;
 import com.jsframe.cumarket.serivce.Service;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
+import java.util.ResourceBundle;
 
 
 @org.springframework.stereotype.Controller
@@ -118,10 +124,18 @@ public class Controller {
     }
 
     @PostMapping("regProc")
-    public String regProc(Board board, HttpSession session, RedirectAttributes rttr){
+    public String regProc(@RequestPart List<MultipartFile> files, Board board, HttpSession session, RedirectAttributes rttr){
         log.info("regProc()");
-        String view = Serv.regProc(board,session,rttr);
+        String view = Serv.regProc(files,board,session,rttr);
         return view;
+    }
+
+    @GetMapping("download")
+    public ResponseEntity<Resource> fileDownload(BoardFile bfile, HttpSession session) throws
+            IOException {
+        ResponseEntity<Resource> resp = Serv.fileDownlaod(bfile, session);
+        return resp;
+
     }
 
 }
