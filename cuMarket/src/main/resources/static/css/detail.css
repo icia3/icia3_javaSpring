@@ -103,3 +103,9 @@ p{
     margin: 26px 0;
     word-break: break-all;
 }
+
+.slider {
+    width: 100%;
+    height: auto;
+    margin: 0px auto;
+}
