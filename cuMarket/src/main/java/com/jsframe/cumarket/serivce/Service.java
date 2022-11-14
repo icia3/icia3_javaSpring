@@ -286,6 +286,46 @@ public class Service {
                 .body(fResource);
     }
 
+    @Transactional
+    public String deleteProc(long bnum, HttpSession session, RedirectAttributes rttr) {
+        log.info("deleteProc()");
+        String msg = null;
+        String view = null;
+
+        Board board = new Board();
+        board.setBnum(bnum);
+
+
+        String realPath = session.getServletContext().getRealPath("/");
+        realPath += "upload/";
+
+        List<BoardFile> bfList = bfRepo.findByBfbid(board);
+
+        try {
+            for(BoardFile bf : bfList){
+                String delPath = realPath += bf.getBfsysname();
+                File file = new File(realPath);
+
+                if (file.exists()){
+                    file.delete();
+                }
+            }
+
+            bfRepo.deleteByBfbid(board);
+
+            bRepo.deleteById(bnum);
+
+            msg = "삭제 성공";
+            view = "redirect:list";
+        } catch (Exception e){
+            e.printStackTrace();
+            msg = "삭제 실패";
+            view = "redirect:detail?bnum=" +bnum;
+        }
+        rttr.addFlashAttribute("msg", msg);
+        return view;
+
+    }
 }
 
 

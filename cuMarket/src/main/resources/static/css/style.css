@@ -9,6 +9,20 @@
 .data-area {
     max-width: 800px;
     margin: 10px auto;
+    color: green;
+    font-size: 35px;
+    text-align: center;
+}
+
+.data-area {
+    margin: 10px auto;
+    max-width: 800px;
+
+}
+
+.content{
+    background-color: rgb(250, 247, 242);
+    height: 600px;
 }
 .content{
     height: 600px;

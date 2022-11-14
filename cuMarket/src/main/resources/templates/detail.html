@@ -11,8 +11,22 @@
             integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
             crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
     <script th:inline="javascript">
-        $(function () {
+        $(function (){
+
+            $("#delBtn").click(function (){
+                location.href = "delete?bnum=" + [[${board.bnum}]];
+            });
+
+            $("#upbtn").click(function (){
+                location.href = ""
+            });
+
+            $("#backbtn").click(function (){
+                location.href="list?pageNum=" + [[${session.pageNum}]];
+            });
+
             $( document ).ready( function() {
                 $( '.slider' ).slick( {
                     autoplay: true,
@@ -20,7 +34,8 @@
                     dots:true,
                     arrows:true,
                 } );
-            } );
+            });
+
         });
 
     </script>
@@ -68,9 +83,11 @@
         </p>
     </div>
     <div class="btn-area">
+
         <button id="backbtn">목록</button>
         <button id="upbtn">수정</button>
-        <button>삭제</button>
+        <button id="delBtn">삭제</button>
+
     </div>
 </section>
 
@@ -81,25 +98,5 @@
 <th:block th:include="footer.html"></th:block>
 
 </body>
-<script th:inline="javascript">
-    $("#backbtn").click(function () {
-        location.href = "/?pageNum=" + [[${session.pageNum}]];
-    });
 
-    $("#upbtn").click(function (){
-        let pw = prompt("비밀번호를 입력하세요.");
-        console.log(pw);
-        if (pw == null || pw == ""){
-            alert("비밀번호가 입력되지 않았습니다.");
-            return;//여기서 함수 종료.
-        }
-
-        if (pw == [[${board.bpwd}]]){
-            location.href = "updateFrm?bnum=" + [[${board.bnum}]];
-        }
-        else {
-            alert("비밀번호가 틀립니다.");
-        }
-    });
-</script>
 </html>
