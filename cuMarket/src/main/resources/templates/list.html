@@ -30,7 +30,7 @@
                 <div class="p-10">작성자</div>
                 <div class="p-15">물품명</div>
                 <div class="p-10">지역</div>
-                <div class="t-date p-30">작성일</div>
+                <div class="t-date p-25">작성일</div>
 
             </div>
             <div class="data-row">
@@ -41,17 +41,18 @@
                     <th:block th:each="bitem:${bList}">
 
                         <div class="p-10" th:text="${bitem.bnum}"></div>
-                        <div class="p-30" th:text="${bitem.btitle}"></div>
+                        <div class="p-30"><a th:href="@{detail(bnum=${bitem.bnum})}"
+                                             th:text="${bitem.btitle}"></a></div>
                         <th:block th:each="mitem:${bitem.bwriter}">
                             <div class="p-10" th:text="${mitem.mid}"></div>
                         </th:block>
 
                         <div class="p-15" th:text="${bitem.bpname}"></div>
                         <div class="p-10" th:text="${bitem.bloc}"></div>
-                        <div class="t-date p-30"
+                        <div class="t-date p-25"
                              th:text="${#dates.format(bitem.bdate, 'yyyy-MM-dd HH:mm:ss')}">
                         </div>
-
+                    </th:block>
                 </th:block>
             </div>
         </div>
