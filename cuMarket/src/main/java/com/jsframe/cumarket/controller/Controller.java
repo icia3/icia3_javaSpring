@@ -143,5 +143,12 @@ public class Controller {
 
     }
 
+    @GetMapping("delete")
+    public String delete(long bnum, HttpSession session, RedirectAttributes rttr){
+        log.info("delete()");
+        String view = Serv.deleteProc(bnum,session,rttr);
+        return view;
+    }
+
 
 }
