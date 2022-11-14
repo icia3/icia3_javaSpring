@@ -55,9 +55,9 @@ public class Service {
     @Autowired
     private MemberRepository mRepo;
 
-    public ModelAndView getBoard(long bnum){
+    public ModelAndView getBoard(long bnum) {
         log.info("getBoard()");
-        mv= new ModelAndView();
+        mv = new ModelAndView();
 
         //게시글 담기
         Board board = bRepo.findById(bnum).get();
@@ -69,16 +69,12 @@ public class Service {
 
     }
 
-
-
-
-
     //리스트에 페이징 처리
-    public ModelAndView getBoardList(Integer pageNum, HttpSession session){
+    public ModelAndView getBoardList(Integer pageNum, HttpSession session) {
         log.info("getBoardList()");
         mv = new ModelAndView();
 
-        if (pageNum == null){//처음에 접속했을 때는 pageNum이 넘어오지 않는다.
+        if (pageNum == null) {//처음에 접속했을 때는 pageNum이 넘어오지 않는다.
             pageNum = 1;
         }
 
@@ -87,7 +83,7 @@ public class Service {
         Pageable pb = PageRequest.of((pageNum - 1), listCnt,
                 Sort.Direction.DESC, "bnum"); //Sort 정렬, Direction 방향, DESC 내림차순, bnum 기준
 
-        Page<Board> result = bRepo.findByBnumGreaterThan(0L,pb);
+        Page<Board> result = bRepo.findByBnumGreaterThan(0L, pb);
         List<Board> bList = result.getContent();
         int totalPage = result.getTotalPages();//전체 페이지 개수
 
@@ -101,6 +97,7 @@ public class Service {
 
         return mv;
     }
+
     //페이징 처리 2
     private String getPaging(Integer pageNum, int totalPage) {
         String pageHtml = null;
@@ -115,14 +112,12 @@ public class Service {
         return pageHtml;
     }
 
-
-
     //게시글 수정
     @Transactional
     public String boardUpdate(List<MultipartFile> files,
                               Board board,
                               HttpSession session,
-                              RedirectAttributes rttr){
+                              RedirectAttributes rttr) {
         log.info("boardUpdate()");
         String msg = null;
         String view = null;
@@ -133,7 +128,7 @@ public class Service {
 
             msg = "수정 성공";
             view = "redirect:detail?bnum=" + board.getBnum();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             msg = "수정 실패";
             view = "redirect:updateFrm?bnum=" + board.getBnum();
@@ -155,25 +150,25 @@ public class Service {
 
             view = "redirect:/";//목록 화면으로 돌아가기.
             msg = "회원가입 성공";
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             view = "redirect:join";
             msg = "회원가입 실패";
         }
-        rttr.addFlashAttribute("msg",msg);
+        rttr.addFlashAttribute("msg", msg);
 
         return view;
     }
 
 
-    public String loginProc (Member member, RedirectAttributes rttr, HttpSession session){
+    public String loginProc(Member member, RedirectAttributes rttr, HttpSession session) {
 
 
         log.info("loginProc()");
         String msg = null;
         String view = null;
 
-        try{
+        try {
             //입력한 pwd
             String cPwd = member.getMpwd();
 
@@ -181,18 +176,17 @@ public class Service {
             String getPwd = mData.getMpwd();
             log.info(getPwd);
             log.info(cPwd);
-            if(cPwd.equals(getPwd)){
-                session.setAttribute("loginName",mData.getMname());
+            if (cPwd.equals(getPwd)) {
+                session.setAttribute("loginName", mData.getMname());
                 session.setAttribute("loginId", mData.getMid());
 
                 msg = "로그인 성공";
                 view = "redirect:main";
-            }
-            else{
+            } else {
                 msg = "로그인 실패";
                 view = "redirect:login";
             }
-        } catch (Exception e){
+        } catch (Exception e) {
 
             msg = "로그인 실패";
             view = "redirect:login";
@@ -211,21 +205,21 @@ public class Service {
         String view = null;
         Member member = null;
 
-        try{
+        try {
 
-             member = board.getBwriter();
-             log.info("이름" + member.getMname());
+            member = board.getBwriter();
+            log.info("이름" + member.getMname());
 
             bRepo.save(board);
             fileUpload(files, session, board);
             msg = "게시물 등록 성공";
             view = "redirect:main";
-        } catch (Exception e){
+        } catch (Exception e) {
             msg = "게시물 등록 실패";
             view = "redirect:register";
         }
 
-        rttr.addFlashAttribute("msg",msg);
+        rttr.addFlashAttribute("msg", msg);
         return view;
     }
 
@@ -284,3 +278,5 @@ public class Service {
                 .body(fResource);
     }
 }
+
+

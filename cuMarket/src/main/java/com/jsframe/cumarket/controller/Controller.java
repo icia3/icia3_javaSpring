@@ -85,7 +85,6 @@ public class Controller {
         return mv;
     }
 
-
     //리스트 페이지 맵핑
     @GetMapping ("list")
     public ModelAndView getList(Integer pageNum, HttpSession session){
