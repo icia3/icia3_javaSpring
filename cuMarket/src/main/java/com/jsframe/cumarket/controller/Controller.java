@@ -79,7 +79,6 @@ public class Controller {
         return mv;
     }
 
-    /*
     //리스트 페이지 맵핑
     @GetMapping ("list")
     public ModelAndView getList(Integer pageNum, HttpSession session){
@@ -97,7 +96,7 @@ public class Controller {
         mv.setViewName("updateFrm");
         return mv;
     }
-    */
+
 
     //수정 매소드 맵핑
     @PostMapping("updateProc")
