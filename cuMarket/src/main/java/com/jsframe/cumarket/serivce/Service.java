@@ -91,7 +91,6 @@ public class Service {
         String paging = getPaging(pageNum, totalPage);
 
 
-
         mv.addObject("bList", bList);
         mv.addObject("paging", paging);
 
@@ -182,7 +181,6 @@ public class Service {
             if (cPwd.equals(getPwd)) {
                 session.setAttribute("loginName", mData.getMname());
                 session.setAttribute("loginId", mData.getMid());
-
                 msg = "로그인 성공";
                 view = "redirect:/";
             } else {
@@ -216,7 +214,7 @@ public class Service {
             bRepo.save(board);
             fileUpload(files, session, board);
             msg = "게시물 등록 성공";
-            view = "redirect:/";
+            view = "redirect:list";
         } catch (Exception e) {
             msg = "게시물 등록 실패";
             view = "redirect:register";
@@ -227,7 +225,7 @@ public class Service {
     }
 
     //게시글 업로드(메소드만 만들어 놨음)
-    private void fileUpload(List<MultipartFile> files, HttpSession session, Board board) throws Exception{
+    private void fileUpload(List<MultipartFile> files, HttpSession session, Board board) throws Exception {
         log.info("fileUpload()");
         //파일 저장 위치 지정. session을 활용
         String realPath = session.getServletContext().getRealPath("/");
@@ -237,13 +235,13 @@ public class Service {
         //업로드용 폴더 : upload
         realPath += "upload/";
         File folder = new File(realPath);
-        if(folder.isDirectory() == false){//폴더가 없을 경우 실행.
+        if (folder.isDirectory() == false) {//폴더가 없을 경우 실행.
             folder.mkdir();//폴더 생성 메소드
         }
 
-        for(MultipartFile mf : files){
+        for (MultipartFile mf : files) {
             String orname = mf.getOriginalFilename();//업로드 파일명 가져오기
-            if(orname.equals("")){
+            if (orname.equals("")) {
                 //업로드하는 파일이 없는 상태.
                 return;//파일 저장 처리 중지!
             }
@@ -277,9 +275,10 @@ public class Service {
         String fileName = URLEncoder.encode(bfile.getBforiname(), "UTF-8");
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .cacheControl(CacheControl.noCache())
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +fileName)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName)
                 .body(fResource);
     }
+
 }
 
 

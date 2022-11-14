@@ -10,6 +10,7 @@ import com.jsframe.cumarket.serivce.Service;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -131,6 +132,12 @@ public class Controller {
         ResponseEntity<Resource> resp = Serv.fileDownlaod(bfile, session);
         return resp;
 
+    }
+    @GetMapping("logout")
+    public String logout(HttpSession session){
+        log.info("logout()");
+        session.invalidate();
+        return "home";
     }
 
 }
