@@ -73,10 +73,12 @@ public class Controller {
 
 
     @GetMapping("detail")
-    public ModelAndView detail(long bnum){
+    public ModelAndView detail(long bnum, HttpSession session){
         log.info("detail()");
         mv = new ModelAndView();
         mv = Serv.getBoard(bnum);
+        //session에서 login정보 받아오도록 처리해서 detail로 넘겨줌
+        mv.addObject("login", session.getAttribute("loginId"));
         mv.setViewName("detail");
         return mv;
     }
