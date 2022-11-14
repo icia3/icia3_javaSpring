@@ -11,6 +11,28 @@
             if (msg != null) {
                 alert(msg);
             }
+
+            //파일 업로드 시 선택한 파일명 출력
+            $("#file").on("change", function () {
+                //파일 입력창(input type=file)에서 파일 목록 가져오기
+                let files = $("#file")[0].files;
+                console.log(files);
+
+                let fileName = "";
+
+                if(files.length > 1){//하나 이상의 파일을 선택했을 경우
+                    fileName = files[0].name + " 외 "
+                        + (files.length - 1) + "개";
+                }
+                else if(files.length == 1) {
+                    fileName = files[0].name;
+                }
+                else {//파일 선택 창에서 '취소' 버튼을 클릭
+                    fileName = "파일선택";
+                }
+
+                $(".upload-name").val(fileName);
+            });
         });
     </script>
 </head>
@@ -33,14 +55,13 @@
         <textarea rows="15" name="bcontent"
                   placeholder="글내용을 작성하세요."
                   class="write-input ta"></textarea><br>
-        <!--
-        <div class="filebox">
 
-            <label for="file">업로드</label>
+        <div class="filebox">
+            <label for="file">업로드</label><br>
             <input type="file" name="files" id="file" multiple>
             <input type="text" class="upload-name" value="파일선택" readonly>
         </div>
-        -->
+
 
         <div class="btn-area">
             <input type="submit" class="btn-write" value="등록">
