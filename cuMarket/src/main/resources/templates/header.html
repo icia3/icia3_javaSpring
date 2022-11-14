@@ -35,3 +35,19 @@
         </div>
     </header>
 </div>
+
+<script th:inline="javascript">
+    $(function () {
+        let name = [[${session.loginName}]];
+
+        if(name != null){
+
+            console.log(name);
+            $("#loginBtn").html(name+"님");
+            $("#wrtBtn").css("display", "block");
+            $("#joinBtn").css("display","none");
+            $("#logoutBtn").css("display","block");
+
+        }
+    });
+</script>

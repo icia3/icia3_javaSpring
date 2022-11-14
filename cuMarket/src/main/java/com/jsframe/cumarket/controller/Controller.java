@@ -40,11 +40,6 @@ public class Controller {
         return "home";
     }
 
-    @GetMapping("main")
-    public String main(){
-        log.info("main()");
-        return "main";
-    }
 
     @GetMapping("join")
     public String join(){
