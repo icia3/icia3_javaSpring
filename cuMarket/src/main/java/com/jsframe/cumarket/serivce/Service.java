@@ -182,7 +182,6 @@ public class Service {
             if (cPwd.equals(getPwd)) {
                 session.setAttribute("loginName", mData.getMname());
                 session.setAttribute("loginId", mData.getMid());
-
                 msg = "로그인 성공";
                 view = "redirect:/";
             } else {
@@ -280,6 +279,8 @@ public class Service {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +fileName)
                 .body(fResource);
     }
+
+
 }
 
 
