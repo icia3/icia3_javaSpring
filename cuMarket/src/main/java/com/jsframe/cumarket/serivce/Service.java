@@ -85,9 +85,12 @@ public class Service {
 
         Page<Board> result = bRepo.findByBnumGreaterThan(0L, pb);
         List<Board> bList = result.getContent();
+
         int totalPage = result.getTotalPages();//전체 페이지 개수
 
         String paging = getPaging(pageNum, totalPage);
+
+
 
         mv.addObject("bList", bList);
         mv.addObject("paging", paging);
@@ -162,7 +165,7 @@ public class Service {
 
 
     public String loginProc(Member member, RedirectAttributes rttr, HttpSession session) {
-
+        ModelAndView mv = new ModelAndView();
 
         log.info("loginProc()");
         String msg = null;
@@ -181,7 +184,7 @@ public class Service {
                 session.setAttribute("loginId", mData.getMid());
 
                 msg = "로그인 성공";
-                view = "redirect:main";
+                view = "redirect:/";
             } else {
                 msg = "로그인 실패";
                 view = "redirect:login";
@@ -213,7 +216,7 @@ public class Service {
             bRepo.save(board);
             fileUpload(files, session, board);
             msg = "게시물 등록 성공";
-            view = "redirect:main";
+            view = "redirect:/";
         } catch (Exception e) {
             msg = "게시물 등록 실패";
             view = "redirect:register";
