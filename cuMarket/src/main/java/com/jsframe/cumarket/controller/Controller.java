@@ -134,6 +134,7 @@ public class Controller {
 
     }
 
+
     @GetMapping("logout")
     public String logout(HttpSession session){
         log.info("logout()");
@@ -141,5 +142,6 @@ public class Controller {
         return "home";
 
     }
+
 
 }
