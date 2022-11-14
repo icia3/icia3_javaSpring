@@ -215,7 +215,7 @@ public class Service {
             bRepo.save(board);
             fileUpload(files, session, board);
             msg = "게시물 등록 성공";
-            view = "redirect:/";
+            view = "redirect:list";
         } catch (Exception e) {
             msg = "게시물 등록 실패";
             view = "redirect:register";
