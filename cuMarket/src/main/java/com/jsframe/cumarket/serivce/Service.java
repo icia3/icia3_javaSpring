@@ -105,7 +105,7 @@ public class Service {
     private String getPaging(Integer pageNum, int totalPage) {
         String pageHtml = null;
         int pageCnt = 2;//보여질 페이지 번호 개수
-        String listName = "?";//게시판 분류 이름(현재 없음)
+        String listName = "list?";//게시판 분류 이름(현재 없음)
 
         PagingUtil paging = new PagingUtil(totalPage, pageNum,
                 pageCnt, listName);
