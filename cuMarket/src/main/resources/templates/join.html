@@ -13,17 +13,17 @@
           enctype="multipart/form-data">
         <h2 class="login-header">회원가입</h2>
 
-        <input type="text" class="write-input" name="m_id"
+        <input type="text" class="write-input" name="mid"
                autofocus placeholder="아이디를 입력하세요." required>
-        <input type="password" class="write-input" name="m_pwd"
+        <input type="password" class="write-input" name="mpwd"
                placeholder="비밀번호를 입력하세요." required>
-        <input type="text" class="write-input" name="m_name"
+        <input type="text" class="write-input" name="mname"
                placeholder="이름을 입력하세요." required>
-        <input type="text" class="write-input" name="m_birth"
+        <input type="text" class="write-input" name="mbirth"
                placeholder="생년월일을 입력하세요." required>
-        <input type="text" class="write-input" name="m_mail"
+        <input type="text" class="write-input" name="mmail"
                placeholder="이메일을 입력하세요." required>
-        <input type="text" class="write-input" name="m_phone"
+        <input type="text" class="write-input" name="mphone"
                placeholder="전화번호를 입력하세요." required>
 
         <div class="btn-area">
@@ -34,5 +34,15 @@
 
 <th:block th:include="footer.html"></th:block>
 </body>
+<script th:inline="javascript">
+    $(function(){
+        let msg = [[${msg}]];
+        console.log(msg);
+        if(msg != null){
+            alert(msg);
+        }
+
+    });
+</script>
 
 </html>
