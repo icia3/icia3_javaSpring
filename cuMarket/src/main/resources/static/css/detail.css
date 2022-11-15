@@ -98,7 +98,7 @@ p{
 }
 #bcontent{
     font-size: 17px;
-    line-height: 6px;
+    line-height: 150%;
     letter-spacing: -0.6px;
     margin: 26px 0;
     word-break: break-all;
@@ -108,4 +108,8 @@ p{
     width: 100%;
     height: auto;
     margin: 0px auto;
+}
+.s-img{
+    width: 729px;
+    height: auto;
 }
