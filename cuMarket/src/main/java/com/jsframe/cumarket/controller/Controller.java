@@ -1,7 +1,5 @@
 package com.jsframe.cumarket.controller;
 
-
-
 import com.jsframe.cumarket.entity.Board;
 import com.jsframe.cumarket.entity.BoardFile;
 import com.jsframe.cumarket.entity.Member;
@@ -39,13 +37,14 @@ public class Controller {
         return "home";
     }
 
-
+    //회원가입 페이지 맵핑
     @GetMapping("join")
     public String join(){
         log.info("join()");
         return "join";
     }
 
+    //회원가입 기능 맵핑
     @PostMapping("writeProc")
     public String writeProc(Member member, RedirectAttributes rttr){
         log.info("writeProc()");
@@ -54,13 +53,14 @@ public class Controller {
         return view;
     }
 
+    //로그인 페이지 맵핑
     @GetMapping("login")
     public String login(){
         log.info("login");
-
         return "login";
     }
 
+    //로그인 기능 맵핑
     @PostMapping("loginProc")
     public String loginProc(Member member, RedirectAttributes rttr, HttpSession session){
         log.info("loginProc()");
@@ -69,16 +69,29 @@ public class Controller {
         return view;
     }
 
+    //게시글 등록 페이지 맵핑
+    @GetMapping("register")
+    public String register(){
+        log.info("register()");
+        return "register";
 
-    @GetMapping("detail")
-    public ModelAndView detail(long bnum, HttpSession session){
-        log.info("detail()");
-        mv = new ModelAndView();
-        mv = Serv.getBoard(bnum);
-        //session에서 login정보 받아오도록 처리해서 detail로 넘겨줌
-        mv.addObject("login", session.getAttribute("loginId"));
-        mv.setViewName("detail");
-        return mv;
+    }
+
+    //게시글 등록 기능 맵핑
+    @PostMapping("regProc")
+    public String regProc(@RequestPart List<MultipartFile> files, Board board, HttpSession session, RedirectAttributes rttr){
+        log.info("regProc()");
+        String view = Serv.regProc(files,board,session,rttr);
+        return view;
+    }
+
+    //게시글 파일 첨부 기능 맵핑
+    @GetMapping("download")
+    public ResponseEntity<Resource> fileDownload(BoardFile bfile, HttpSession session) throws
+            IOException {
+        ResponseEntity<Resource> resp = Serv.fileDownlaod(bfile, session);
+        return resp;
+
     }
 
     //리스트 페이지 맵핑
@@ -90,6 +103,19 @@ public class Controller {
         return mv;
     }
 
+    //상세정보 페이지 맵핑
+    @GetMapping("detail")
+    public ModelAndView detail(long bnum, HttpSession session){
+        log.info("detail()");
+        mv = new ModelAndView();
+        mv = Serv.getBoard(bnum);
+        //session에서 login정보 받아오도록 처리해서 detail로 넘겨줌
+        mv.addObject("login", session.getAttribute("loginId"));
+        mv.setViewName("detail");
+        return mv;
+    }
+
+
     //수정 페이지 맵핑
     @GetMapping("updateFrm")
     public ModelAndView updateFrm(long bnum){
@@ -100,7 +126,7 @@ public class Controller {
     }
 
 
-    //수정 매소드 맵핑
+    //수정 기능 맵핑
     @PostMapping("updateProc")
     public String updateProc(List<MultipartFile> files,
                              Board board,
@@ -112,27 +138,7 @@ public class Controller {
         return view;
     }
 
-    @GetMapping("register")
-    public String register(){
-        log.info("register()");
-        return "register";
-
-    }
-
-    @PostMapping("regProc")
-    public String regProc(@RequestPart List<MultipartFile> files, Board board, HttpSession session, RedirectAttributes rttr){
-        log.info("regProc()");
-        String view = Serv.regProc(files,board,session,rttr);
-        return view;
-    }
-
-    @GetMapping("download")
-    public ResponseEntity<Resource> fileDownload(BoardFile bfile, HttpSession session) throws
-            IOException {
-        ResponseEntity<Resource> resp = Serv.fileDownlaod(bfile, session);
-        return resp;
-
-    }
+    //로그아웃 기능 맵핑
     @GetMapping("logout")
     public String logout(HttpSession session){
         log.info("logout()");
@@ -140,6 +146,7 @@ public class Controller {
         return "home";
     }
 
+    //삭제 기능 맵핑
     @GetMapping("delete")
     public String delete(long bnum, HttpSession session, RedirectAttributes rttr){
         log.info("delete()");
@@ -147,11 +154,12 @@ public class Controller {
         return view;
     }
 
-    @GetMapping("serchProd")
-    public ModelAndView serchProd(Integer pageNum, HttpSession session,String word,RedirectAttributes rttr){
-        log.info("serchProc()");
+    //검색 기능 맵핑
+    @GetMapping("searchProd")
+    public ModelAndView searchProd(Integer pageNum, HttpSession session,String word,RedirectAttributes rttr){
+        log.info("searchProc()");
         log.info(word);
-        mv = Serv.serching(pageNum, session,word,rttr);
+        mv = Serv.searching(pageNum, session,word,rttr);
         mv.setViewName("list2");
         return mv;
     }
