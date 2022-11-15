@@ -22,12 +22,9 @@
 
 .content{
     background-color: rgb(250, 247, 242);
-    height: 600px;
+    height: 1000px;
 }
-.content{
-    height: 600px;
-    background-color: rgb(250, 247, 242);
-}
+
 
 
 /*.title-row .t-date, .title-row .t-view, .data-row .t-date, .data-row .t-view*/
@@ -127,4 +124,8 @@
     width: 300px;
     text-align: center;
     margin-bottom: 100px;
+}
+
+.board-form{
+    padding: 30px;
 }
