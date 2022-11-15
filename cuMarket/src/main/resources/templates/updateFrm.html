@@ -27,25 +27,23 @@
         <th:block th:object="${board}">
             <input type="hidden" name="bnum" th:value="*{bnum}">
             <input type="hidden" name="bdate" th:value="*{bdate}">
-            <input type="text" class="write-input" th:value="*{btitle}"
+            <span>제목</span><input type="text" class="write-input" th:value="*{btitle}"
                    name="btitle" autofocus placeholder="제목"
                    required>
-
-            <input type="text" class="write-input" th:value="${board.bwriter.mid}"
+            <span>작성자</span><input type="text" class="write-input" th:value="${board.bwriter.mid}"
                    name="bwriter" placeholder="작성자"
                    required readonly>
-
-            <input type="text" class="write-input" th:value="*{bpname}"
+            <span>상품명</span><input type="text" class="write-input" th:value="*{bpname}"
                    name="bpname" placeholder="상품이름"
                    required>
-            <input type="number" class="write-input" th:value="*{bprice}"
+            <span>가격</span><input type="number" class="write-input" th:value="*{bprice}"
                    name="bprice" placeholder="상품가격"
                    required>
-            <input type="text" class="write-input" th:value="*{bloc}"
+            <span>지역</span><input type="text" class="write-input" th:value="*{bloc}"
                    name="bloc" placeholder="판매지역"
                    required>
 
-            <textarea rows="15" name="bcontent"
+            <span>내용</span><textarea rows="15" name="bcontent"
                       placeholder="내용을 적어주세요."
                       class="write-input ta"
                       th:text="*{bcontent}"></textarea>
