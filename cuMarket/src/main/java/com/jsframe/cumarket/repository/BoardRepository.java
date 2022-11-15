@@ -14,5 +14,7 @@ Page<Board> findByBnumGreaterThan(long bnum, Pageable pageable);
 
 Board findByBpname(String bpname);
 
+Board findByBtitle(String btitle);
+
     void deleteByBnum(long bnum);
 }
