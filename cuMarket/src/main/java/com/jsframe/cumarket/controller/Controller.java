@@ -150,10 +150,10 @@ public class Controller {
     }
 
     @GetMapping("serchProd")
-    public ModelAndView serchProd(Integer pageNum, HttpSession session,String word){
+    public ModelAndView serchProd(Integer pageNum, HttpSession session,String word,RedirectAttributes rttr){
         log.info("serchProc()");
         log.info(word);
-        mv = Serv.serching(pageNum, session,word);
+        mv = Serv.serching(pageNum, session,word,rttr);
         mv.setViewName("list2");
         return mv;
     }

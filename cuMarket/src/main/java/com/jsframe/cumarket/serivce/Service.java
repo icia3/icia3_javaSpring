@@ -334,7 +334,7 @@ public class Service {
 
     }
 
-    public ModelAndView serching(Integer pageNum, HttpSession session, String word) {
+    public ModelAndView serching(Integer pageNum, HttpSession session, String word,RedirectAttributes rttr) {
         log.info("serching()");
         mv = new ModelAndView();
         String msg = null;
@@ -354,32 +354,38 @@ public class Service {
 
         Board cList = bRepo.findByBpname(word);
 
+        Board dList = bRepo.findByBtitle(word);
+
         int totalPage = result.getTotalPages();//전체 페이지 개수
 
         String paging = getPaging(pageNum, totalPage);
 
-        if(cList == null){
-            msg = "검색된 결과가 없습니다.";
-
-            mv.addObject("bList", bList);
-            mv.addObject("paging", paging);
-
-            //현재 보이는 페이지의 번호를 저장.
-            session.setAttribute("pageNum", pageNum);
-
-
-        }else{
-
+        if(cList != null){
             mv.addObject("bList", cList);
             mv.addObject("paging", paging);
 
-            //현재 보이는 페이지의 번호를 저장.
             session.setAttribute("pageNum", pageNum);
 
-        }
+        }else if(dList != null){
+            mv.addObject("bList", dList);
+            mv.addObject("paging", paging);
 
+            //현재 보이는 페이지의 번호를 저장.
+            session.setAttribute("pageNum", pageNum);
+        }else if(cList == dList){
+            mv.addObject("bList", cList);
+            mv.addObject("paging", paging);
+
+            session.setAttribute("pageNum", pageNum);
+        }else {
+            msg = "검색된 결과가 없습니다.";
+
+            //현재 보이는 페이지의 번호를 저장.
+            session.setAttribute("pageNum", pageNum);
+        }
         return mv;
     }
 }
+
 
 
