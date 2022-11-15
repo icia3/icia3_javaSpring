@@ -287,7 +287,7 @@ public class Service {
         realpath += "upload/" + bfile.getBfsysname();
         InputStreamResource fResource = new InputStreamResource(new FileInputStream(realpath));
         String fileName = URLEncoder.encode(bfile.getBforiname(), "UTF-8");
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
+        return  ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .cacheControl(CacheControl.noCache())
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName)
                 .body(fResource);
