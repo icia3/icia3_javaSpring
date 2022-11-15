@@ -147,16 +147,23 @@ public class Service {
         String msg = null;
         String view = null;
 
-        try {
-            mRepo.save(member);//
+        Member mem1 = mRepo.findByMid(member.getMid());
+        if(mem1 ==null ){
+            try {
+                mRepo.save(member);//
 
-            view = "redirect:/";//목록 화면으로 돌아가기.
-            msg = "회원가입 성공";
-        } catch (Exception e) {
-            e.printStackTrace();
+                view = "redirect:/";//목록 화면으로 돌아가기.
+                msg = "회원가입 성공";
+            } catch (Exception e) {
+                e.printStackTrace();
+                view = "redirect:join";
+                msg = "회원가입 실패";
+            }
+        }else {
             view = "redirect:join";
-            msg = "회원가입 실패";
+            msg = "이미 존재하는 아이디 입니다.";
         }
+
         rttr.addFlashAttribute("msg", msg);
 
         return view;
