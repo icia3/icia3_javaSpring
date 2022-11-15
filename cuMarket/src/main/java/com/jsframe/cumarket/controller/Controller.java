@@ -149,4 +149,12 @@ public class Controller {
         return view;
     }
 
+    @GetMapping("serchProd")
+    public ModelAndView serchProd(Integer pageNum, HttpSession session,String word){
+        log.info("serchProc()");
+        log.info(word);
+        mv = Serv.serching(pageNum, session,word);
+        mv.setViewName("list2");
+        return mv;
+    }
 }

@@ -333,6 +333,52 @@ public class Service {
         return view;
 
     }
+
+    public ModelAndView serching(Integer pageNum, HttpSession session, String word) {
+        log.info("serching()");
+        mv = new ModelAndView();
+        String msg = null;
+
+        if (pageNum == null) {//처음에 접속했을 때는 pageNum이 넘어오지 않는다.
+            pageNum = 1;
+        }
+
+        int listCnt = 5;//페이지 당 보여질 게시글의 개수.
+        //페이징 조건 생성
+        Pageable pb = PageRequest.of((pageNum - 1), listCnt,
+                Sort.Direction.DESC, "bnum"); //Sort 정렬, Direction 방향, DESC 내림차순, bnum 기준
+
+
+        Page<Board> result = bRepo.findByBnumGreaterThan(0L, pb);
+        List<Board> bList = result.getContent();
+
+        Board cList = bRepo.findByBpname(word);
+
+        int totalPage = result.getTotalPages();//전체 페이지 개수
+
+        String paging = getPaging(pageNum, totalPage);
+
+        if(cList == null){
+            msg = "검색된 결과가 없습니다.";
+
+            mv.addObject("bList", bList);
+            mv.addObject("paging", paging);
+
+            //현재 보이는 페이지의 번호를 저장.
+            session.setAttribute("pageNum", pageNum);
+
+
+        }else{
+
+            mv.addObject("bList", cList);
+            mv.addObject("paging", paging);
+
+            //현재 보이는 페이지의 번호를 저장.
+            session.setAttribute("pageNum", pageNum);
+
+        }
+        return mv;
+    }
 }
 
 
