@@ -12,7 +12,6 @@
                 alert(msg);
             }
 
-
             //파일 업로드 시 선택한 파일명 출력
             $("#file").on("change", function () {
                 //파일 입력창(input type=file)에서 파일 목록 가져오기
@@ -36,8 +35,10 @@
             });
         });
     </script>
+    <link rel="stylesheet" href="css/register.css">
 </head>
 <body>
+<th:block th:include="header.html"></th:block>
 
 <div class="content">
     <form th:action="@{regProc}" method="post" class="write-form"
@@ -69,6 +70,6 @@
         </div>
     </form>
 </div>
-
+<th:block th:include="footer.html"></th:block>
 </body>
 </html>
