@@ -111,6 +111,31 @@ p{
 }
 .s-img{
     width: 700px;
-    height: auto;
+    height: 700px;
+}
+.visual{
+    position: relative;}
+.visual button{
+    position: absolute;
+    z-index:10;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background: rgba(0,0,0,.5);
+}
+.visual button:before{
+    font-family: 'xeicon';
+    color: #fff;
+}
+.visual button.slick-prev{left: 0;}
+.visual button.slick-prev:before{
+    content:"\e93d";
+}
+.visual button.slick-next{right: 0;}
+.visual button.slick-next:before{
+    content: "\e940";
+
 }
 
