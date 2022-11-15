@@ -5,12 +5,13 @@
     <title>detail</title>
     <link rel="stylesheet" href="css/cumarket.css">
     <link rel="stylesheet" href="css/detail.css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
             integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
             crossorigin="anonymous"></script>
-    <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
     <script th:inline="javascript">
         $(function () {
@@ -73,15 +74,17 @@
 <section id="article-images">
     <div>
         <div class="image-wrap">
-            <div class="slider">
-                <th:block th:each="bf:${bfList}">
-                    <div><img class="s-img" th:src="@{download(bfsysname=${bf.bfsysname},bforiname=${bf.bforiname})}"></div>
-                </th:block>
+            <div class="visual">
+                <div class="slider">
+                    <th:block th:each="bf:${bfList}">
+                        <div><img class="s-img"
+                                  th:src="@{download(bfsysname=${bf.bfsysname},bforiname=${bf.bforiname})}"></div>
+                    </th:block>
+                </div>
             </div>
         </div>
     </div>
 </section>
-
 <!--프로필-->
 <section id="article-profile">
     <div id="article-profile-t">
@@ -116,10 +119,7 @@
         <button id="delBtn">삭제</button>
 
     </div>
-</section>
 
-<!--댓글 기능-->
-<section>
 
 </section>
 <th:block th:include="footer.html"></th:block>
