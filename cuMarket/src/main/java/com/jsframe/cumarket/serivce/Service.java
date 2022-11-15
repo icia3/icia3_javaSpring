@@ -141,6 +141,7 @@ public class Service {
     }
 
 
+    //회원가입
     @Transactional
     public String insertMember(Member member, RedirectAttributes rttr) {
         log.info("insertMember()");
@@ -169,7 +170,7 @@ public class Service {
         return view;
     }
 
-
+    //로그인
     public String loginProc(Member member, RedirectAttributes rttr, HttpSession session) {
         ModelAndView mv = new ModelAndView();
 
@@ -212,6 +213,7 @@ public class Service {
         return view;
     }
 
+    //게시물 등록
     @Transactional
     public String regProc(List<MultipartFile> files,
                           Board board, HttpSession session, RedirectAttributes rttr) {
@@ -238,7 +240,7 @@ public class Service {
         return view;
     }
 
-    //게시글 업로드(메소드만 만들어 놨음)
+    //게시글 업로드
     private void fileUpload(List<MultipartFile> files, HttpSession session, Board board) throws Exception {
         log.info("fileUpload()");
         //파일 저장 위치 지정. session을 활용
@@ -293,6 +295,7 @@ public class Service {
                 .body(fResource);
     }
 
+    //게시물 삭제
     @Transactional
     public String deleteProc(long bnum, HttpSession session, RedirectAttributes rttr) {
         log.info("deleteProc()");
@@ -334,8 +337,9 @@ public class Service {
 
     }
 
-    public ModelAndView serching(Integer pageNum, HttpSession session, String word,RedirectAttributes rttr) {
-        log.info("serching()");
+    //게시물 검색
+    public ModelAndView searching(Integer pageNum, HttpSession session, String word,RedirectAttributes rttr) {
+        log.info("searching()");
         mv = new ModelAndView();
         String msg = null;
 
