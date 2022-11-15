@@ -383,9 +383,6 @@ public class Service {
             //현재 보이는 페이지의 번호를 저장.
             session.setAttribute("pageNum", pageNum);
         }
-        log.info("rttr");
-
-        rttr.addFlashAttribute("msg",msg);
         return mv;
     }
 }
