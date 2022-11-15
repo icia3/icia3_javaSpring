@@ -386,6 +386,23 @@ public class Service {
         return mv;
     }
 
+    public String search(String mid) {
+        log.info("중복검사");
+        String num = null;
+
+
+        Member member = null;
+        try {
+            member = mRepo.findById(mid).get();
+            num = "2";
+        } catch (Exception e) {
+            e.printStackTrace();
+            num = "1";
+        }
+
+        return num;
+    }
+
 }
 
 
