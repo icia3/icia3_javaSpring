@@ -4,13 +4,13 @@
             <div class="wep--header__logo align-center">
                 <h1 class="wep--logo" id="logo" style="cursor: pointer">오이마켓</h1>
             </div>
-            <form th:action="@{serchProd}" method="post" enctype="multipart/form-data">
+            <form th:action="@{serchProd}" method="get" enctype="multipart/form-data">
             <nav class="wep--header__menu flex li align-center">
                 <li class="active">
                     <a th:href="@{list}">중고거래</a>
                 </li>
                 <li>
-                    <input type="text" class="wep--header__search input" placeholder="물품이나 동네를 검색해보세요.">
+                    <input type="text" name="word" class="wep--header__search input" placeholder="물품이나 동네를 검색해보세요.">
                 </li>
                 <li>
                     <input type="submit" class="wep--header__chat input over" value="검색">

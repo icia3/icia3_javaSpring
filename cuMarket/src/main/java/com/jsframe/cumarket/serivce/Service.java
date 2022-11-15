@@ -91,7 +91,6 @@ public class Service {
         String paging = getPaging(pageNum, totalPage);
 
 
-
         mv.addObject("bList", bList);
         mv.addObject("paging", paging);
 
@@ -148,16 +147,23 @@ public class Service {
         String msg = null;
         String view = null;
 
-        try {
-            mRepo.save(member);//
+        Member mem1 = mRepo.findByMid(member.getMid());
+        if(mem1 ==null ){
+            try {
+                mRepo.save(member);//
 
-            view = "redirect:/";//목록 화면으로 돌아가기.
-            msg = "회원가입 성공";
-        } catch (Exception e) {
-            e.printStackTrace();
+                view = "redirect:/";//목록 화면으로 돌아가기.
+                msg = "회원가입 성공";
+            } catch (Exception e) {
+                e.printStackTrace();
+                view = "redirect:join";
+                msg = "회원가입 실패";
+            }
+        }else {
             view = "redirect:join";
-            msg = "회원가입 실패";
+            msg = "이미 존재하는 아이디 입니다.";
         }
+
         rttr.addFlashAttribute("msg", msg);
 
         return view;
@@ -233,7 +239,7 @@ public class Service {
     }
 
     //게시글 업로드(메소드만 만들어 놨음)
-    private void fileUpload(List<MultipartFile> files, HttpSession session, Board board) throws Exception{
+    private void fileUpload(List<MultipartFile> files, HttpSession session, Board board) throws Exception {
         log.info("fileUpload()");
         //파일 저장 위치 지정. session을 활용
         String realPath = session.getServletContext().getRealPath("/");
@@ -243,13 +249,13 @@ public class Service {
         //업로드용 폴더 : upload
         realPath += "upload/";
         File folder = new File(realPath);
-        if(folder.isDirectory() == false){//폴더가 없을 경우 실행.
+        if (folder.isDirectory() == false) {//폴더가 없을 경우 실행.
             folder.mkdir();//폴더 생성 메소드
         }
 
-        for(MultipartFile mf : files){
+        for (MultipartFile mf : files) {
             String orname = mf.getOriginalFilename();//업로드 파일명 가져오기
-            if(orname.equals("")){
+            if (orname.equals("")) {
                 //업로드하는 파일이 없는 상태.
                 return;//파일 저장 처리 중지!
             }
@@ -283,10 +289,9 @@ public class Service {
         String fileName = URLEncoder.encode(bfile.getBforiname(), "UTF-8");
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .cacheControl(CacheControl.noCache())
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +fileName)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName)
                 .body(fResource);
     }
-
 
     @Transactional
     public String deleteProc(long bnum, HttpSession session, RedirectAttributes rttr) {
@@ -327,6 +332,52 @@ public class Service {
         rttr.addFlashAttribute("msg", msg);
         return view;
 
+    }
+
+    public ModelAndView serching(Integer pageNum, HttpSession session, String word) {
+        log.info("serching()");
+        mv = new ModelAndView();
+        String msg = null;
+
+        if (pageNum == null) {//처음에 접속했을 때는 pageNum이 넘어오지 않는다.
+            pageNum = 1;
+        }
+
+        int listCnt = 5;//페이지 당 보여질 게시글의 개수.
+        //페이징 조건 생성
+        Pageable pb = PageRequest.of((pageNum - 1), listCnt,
+                Sort.Direction.DESC, "bnum"); //Sort 정렬, Direction 방향, DESC 내림차순, bnum 기준
+
+
+        Page<Board> result = bRepo.findByBnumGreaterThan(0L, pb);
+        List<Board> bList = result.getContent();
+
+        Board cList = bRepo.findByBpname(word);
+
+        int totalPage = result.getTotalPages();//전체 페이지 개수
+
+        String paging = getPaging(pageNum, totalPage);
+
+        if(cList == null){
+            msg = "검색된 결과가 없습니다.";
+
+            mv.addObject("bList", bList);
+            mv.addObject("paging", paging);
+
+            //현재 보이는 페이지의 번호를 저장.
+            session.setAttribute("pageNum", pageNum);
+
+
+        }else{
+
+            mv.addObject("bList", cList);
+            mv.addObject("paging", paging);
+
+            //현재 보이는 페이지의 번호를 저장.
+            session.setAttribute("pageNum", pageNum);
+
+        }
+        return mv;
     }
 }
 

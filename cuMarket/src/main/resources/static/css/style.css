@@ -1,6 +1,14 @@
 .login-form, .login-header {
     margin-top: 100px;
     margin-bottom: 30px;
+    text-align: center;
+    font-size: 30px;
+    color: green;
+}
+
+.data-area {
+    max-width: 800px;
+    margin: 10px auto;
     color: green;
     font-size: 35px;
     text-align: center;
@@ -15,8 +23,12 @@
 .content{
     background-color: rgb(250, 247, 242);
     height: 600px;
-
 }
+.content{
+    height: 600px;
+    background-color: rgb(250, 247, 242);
+}
+
 
 /*.title-row .t-date, .title-row .t-view, .data-row .t-date, .data-row .t-view*/
 /*{*/

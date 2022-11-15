@@ -135,14 +135,11 @@ public class Controller {
         return resp;
 
     }
-
-
     @GetMapping("logout")
     public String logout(HttpSession session){
         log.info("logout()");
         session.invalidate();
         return "home";
-
     }
 
     @GetMapping("delete")
@@ -152,5 +149,12 @@ public class Controller {
         return view;
     }
 
-
+    @GetMapping("serchProd")
+    public ModelAndView serchProd(Integer pageNum, HttpSession session,String word){
+        log.info("serchProc()");
+        log.info(word);
+        mv = Serv.serching(pageNum, session,word);
+        mv.setViewName("list2");
+        return mv;
+    }
 }
