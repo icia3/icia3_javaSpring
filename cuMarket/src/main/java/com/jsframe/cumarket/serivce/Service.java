@@ -64,7 +64,8 @@ public class Service {
         mv.addObject("board", board);
 
         //첨부파일 담기
-
+        List<BoardFile> bfList = bfRepo.findByBfbid(board);
+        mv.addObject("bfList", bfList);
         return mv;
 
     }

@@ -26,10 +26,10 @@
                 if (result) {
                     if ([[${board.bwriter.mid}]] === [[${login}]]) {
                         location.href = "delete?bnum=" + [[${board.bnum}]];
-                    } else if ([[${login}]] == "admin"){
+                    } else if ([[${login}]] == "admin") {
                         alert("관리자 권한으로 게시글을 삭제합니다.")
                         location.href = "delete?bnum=" + [[${board.bnum}]];
-                    }else {
+                    } else {
                         alert("본인이 작성한 게시글만 삭제할 수 있습니다!")
                     }
                 }
@@ -43,7 +43,7 @@
                 } else if ([[${login}]] == "admin") {
                     alert("관리자 권한으로 게시글을 수정합니다.")
                     location.href = "updateFrm?bnum=" + [[${board.bnum}]];
-                }else {
+                } else {
                     alert("본인이 작성한 게시글만 수정할 수 있습니다!")
                 }
             });
@@ -74,10 +74,9 @@
     <div>
         <div class="image-wrap">
             <div class="slider">
-                <div><img src="/images/bg1.png" alt="1"></div>
-                <div><img src="/images/bg2.png" alt="2"></div>
-                <div><img src="/images/bg3.png" alt="3"></div>
-                <div><img src="/images/bg4.png" alt="4"></div>
+                <th:block th:each="bf:${bfList}">
+                    <div><img class="s-img" th:src="@{download(bfsysname=${bf.bfsysname},bforiname=${bf.bforiname})}"></div>
+                </th:block>
             </div>
         </div>
     </div>
