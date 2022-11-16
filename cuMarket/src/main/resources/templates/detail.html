@@ -76,6 +76,7 @@
         <div class="image-wrap">
             <div class="visual">
                 <th:block th:if="${#lists.isEmpty(bfList)}">
+                    <div id="mimage-wrap"><img src="/images/오이1.png"></div>
                 </th:block>
                 <th:block th:unless="${#lists.isEmpty(bfList)}">
                     <div class="slider">
@@ -109,19 +110,19 @@
     <p id="bpname" th:text="${board.bpname}"> &nbsp
         <time id="bdate" th:text="${#dates.format(baord.bdate, 'yyyy-MM-dd HH:mm:ss')}"></time>
     </p>
-    <p id="bprice" th:text="${board.bprice}"></p>
+    <p id="bprice" th:text="${board.bprice}+'원'"></p>
     <div id="article-content">
         <p id="bcontent" th:text="${board.bcontent}">
 
         </p>
     </div>
-    <div class="btn-area">
-        <button id="backbtn">목록</button>
-        <button id="upbtn">수정</button>
-        <button id="delBtn">삭제</button>
-    </div>
-</section>
 
+</section>
+<div class="btn-area">
+    <button id="backbtn">목록</button>
+    <button id="upbtn">수정</button>
+    <button id="delBtn">삭제</button>
+</div>
 
 <th:block th:include="footer.html"></th:block>
 </body>

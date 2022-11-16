@@ -91,6 +91,7 @@ p{
     width: 677px;
     height: 31.67px;
     align-items: center;
+    border-bottom: 1px solid #e9ecef;
 }
 #article-content{
     margin-top: 8px;
@@ -151,4 +152,16 @@ p{
     border-radius: 8px;
     list-style: none;
     text-align: center;
+}
+.btn-area{
+    padding-top:30px;
+    width: 677px;
+    margin: 0 auto;
+}
+#mimage-wrap{
+    margin: 0 auto;
+    text-align: center;
+}
+#mimage-wrap>img{
+    opacity: 50%;
 }
