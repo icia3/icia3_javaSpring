@@ -12,9 +12,9 @@ public interface BoardRepository extends CrudRepository<Board, Long> {
 
 Page<Board> findByBnumGreaterThan(long bnum, Pageable pageable);
 
-Board findByBpname(String bpname);
+List<Board> findByBpname(String bpname);
 
-Board findByBtitle(String btitle);
+List<Board> findByBtitle(String btitle);
 
     void deleteByBnum(long bnum);
 }
