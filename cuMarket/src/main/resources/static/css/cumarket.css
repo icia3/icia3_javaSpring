@@ -262,9 +262,11 @@ a:visited {
     font-size: 14px;
   }
 
-  .non-content{
-      column-span: all;
-  }
+.non-content{
+    height: 500px;
+    width: 100%;
+    column-span: all;
+}
 
 
 

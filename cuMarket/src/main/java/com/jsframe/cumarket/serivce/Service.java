@@ -339,10 +339,10 @@ public class Service {
     }
 
     //게시물 검색
-    public ModelAndView searching(Integer pageNum, HttpSession session, String word,RedirectAttributes rttr) {
+    public ModelAndView searching(Integer pageNum, HttpSession session, String word) {
         log.info("searching()");
         mv = new ModelAndView();
-        String msg = null;
+        String msg = word;
 
         if (pageNum == null) {//처음에 접속했을 때는 pageNum이 넘어오지 않는다.
             pageNum = 1;
@@ -355,7 +355,6 @@ public class Service {
 
 
         Page<Board> result = bRepo.findByBnumGreaterThan(0L, pb);
-        List<Board> bList = result.getContent();
 
         List<Board> cList = bRepo.findByBpname(word);
 
@@ -365,25 +364,20 @@ public class Service {
 
         String paging = getPaging(pageNum, totalPage);
 
-        if(cList != null){
+        if(cList != null && cList.size()!=0){
             mv.addObject("bList", cList);
             mv.addObject("paging", paging);
 
             session.setAttribute("pageNum", pageNum);
 
-        }else if(dList != null){
+        }else if(dList != null && dList.size()!=0){
             mv.addObject("bList", dList);
             mv.addObject("paging", paging);
 
             //현재 보이는 페이지의 번호를 저장.
             session.setAttribute("pageNum", pageNum);
-        }else if(cList == dList){
-            mv.addObject("bList", cList);
-            mv.addObject("paging", paging);
-
-            session.setAttribute("pageNum", pageNum);
         }else {
-            msg = "검색된 결과가 없습니다.";
+            mv.addObject("msg",msg);
 
             //현재 보이는 페이지의 번호를 저장.
             session.setAttribute("pageNum", pageNum);

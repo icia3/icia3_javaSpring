@@ -156,10 +156,10 @@ public class Controller {
 
     //검색 기능 맵핑
     @GetMapping("searchProd")
-    public ModelAndView searchProd(Integer pageNum, HttpSession session,String word,RedirectAttributes rttr){
+    public ModelAndView searchProd(Integer pageNum, HttpSession session,String word){
         log.info("searchProc()");
         log.info(word);
-        mv = Serv.searching(pageNum, session,word,rttr);
+        mv = Serv.searching(pageNum, session,word);
         mv.setViewName("list2");
         return mv;
     }
