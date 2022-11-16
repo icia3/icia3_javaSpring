@@ -357,9 +357,9 @@ public class Service {
         Page<Board> result = bRepo.findByBnumGreaterThan(0L, pb);
         List<Board> bList = result.getContent();
 
-        Board cList = bRepo.findByBpname(word);
+        List<Board> cList = bRepo.findByBpname(word);
 
-        Board dList = bRepo.findByBtitle(word);
+        List<Board> dList = bRepo.findByBtitle(word);
 
         int totalPage = result.getTotalPages();//전체 페이지 개수
 
