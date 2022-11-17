@@ -107,6 +107,7 @@
 </section>
 <section id="article-description">
     <h1 id="btitle" style="margin-top: 0px" th:text="${board.btitle}"></h1>
+    <p th:text="${#dates.format(board.bdate, 'yyyy-MM월-dd일')}"></p>
     <p id="bpname" th:text="${board.bpname}"> &nbsp
         <time id="bdate" th:text="${#dates.format(baord.bdate, 'yyyy-MM-dd HH:mm:ss')}"></time>
     </p>
